@@ -24,8 +24,294 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<img class="nobg" src="images/Git-Logo-White.png" height="90" width="200">
+					<h3>Advanced course #1</h3>
+					<p>
+						Romain Cancilliere
+					</p>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						## Contents
+
+						* Ignore files
+						* Rewrite history
+						* Add/Checkout with patch option
+						* Interactive add
+						* Reflog
+						* Stash
+						* Grep
+						* Rerere
+					</script>
+				</section>
+				<section>
+					<section data-background-image="gif/ignore.gif">
+						<h3>Ignore files</h3>
+					</section>
+					<section>
+						<p>Tell Git to not take account of specific files and/or folders (locally or globally)</p>
+						<img class="nobg" src="images/status_gitignore.png">
+					</section>
+					<section>
+						<h3>Globally (for all users)</h3>
+						<p>Edit .gitignore (if it exists)</p>
+						<img class="nobg" src="images/gitignore.png">
+					</section>
+					<section>
+						<h3>Example</h3>
+						<img class="nobg" src="images/example_gitignore.png">
+					</section>
+					<section>
+						<h3>Locally (for me)</h3>
+						<p>No impact for other users working on the same repository</p>
+						<img class="nobg" src="images/exclude_gitignore.png">
+					</section>
+					<section>
+						<h3>Locally and globally (for me)</h3>
+						<p>Apply for all local repositories</p>
+						<img class="nobg" src="images/global_gitignore.png">
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/history.gif">
+						<h3>Rewrite history</h3>
+					</section>
+					<section>
+						<p>Clean local history before pushing</p>
+						<img class="nobg" src="images/log_rebase.png">
+					</section>
+					<section>
+						<p>Here comes interactive rebase !</p>
+						<img class="nobg" src="images/command_rebase.png">
+					</section>
+					<section>
+						<h3>Example</h3>
+						<p>Let's melt the two recent commits into one and reword it</p>
+						<img class="nobg" src="images/command_2_rebase.png">
+						<img class="nobg" src="images/diagram.png">
+					</section>
+					<section>
+						<img class="nobg" src="images/edit_rebase.png">
+					</section>
+					<section>
+						<img class="nobg" src="images/edit_2_rebase.png">
+					</section>
+					<section>
+						<img class="nobg" src="images/edit_3_rebase.png">
+					</section>
+					<section>
+						<h3>TADA !</h3>
+						<img class="nobg" src="images/diagram2.png">
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/patch.gif">
+						<h3>Add/Checkout with patch option</h3>
+					</section>
+					<section>
+						<p>Add specific lines with the option Patch</p>
+						<img class="nobg" src="images/command_patch.png">
+					</section>
+					<section>
+						<h3>Example</h3>
+						<p>We have a file poem.txt with two unfinished couplets</p>
+						<img class="nobg" src="images/example_patch.png">
+					</section>
+					<section>
+						<p>After modifications, we want to commit only the first part</p>
+						<img class="nobg" src="images/example_2_patch.png" height="400" width="500">
+					</section>
+					<section>
+						<img class="nobg" src="images/example_3_patch.png" height="400" width="500">
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							* y - stage this hunk
+							* n - do not stage this hunk
+							* q - quit; do not stage this hunk or any of the remaining ones
+							* a - stage this hunk and all later hunks in the file
+							* d - do not stage this hunk or any of the later hunks in the file
+							* s - split the current hunk into smaller hunks
+							* e - manually edit the current hunk
+							* ? - print help
+						</script>
+					</section>
+					<section>
+						<img class="nobg" src="images/example_4_patch.png" height="600" width="500">
+					</section>
+					<section>
+						<p>We have succeeded to stage only specific lines</p>
+						<img class="nobg" src="images/example_5_patch.png" height="400" width="800">
+					</section>
+					<section>
+						<p>Discard specific lines with the option Patch</p>
+						<img class="nobg" src="images/command_2_patch.png">
+					</section>
+					<section>
+						<p>We want to discard the end of the second couplet</p>
+						<img class="nobg" src="images/example_6_patch.png">
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							* y - discard this hunk from worktree
+							* n - do not discard this hunk from worktree
+							* q - quit; do not discard this hunk or any of the remaining ones
+							* a - discard this hunk and all later hunks in the file
+							* d - do not discard this hunk or any of the later hunks in the file
+							* e - manually edit the current hunk
+							* ? - print help
+						</script>
+					</section>
+					<section>
+						<p>We have succeeded to discard specific lines</p>
+						<img class="nobg" src="images/example_7_patch.png">
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/add.gif">
+						<h3>Interactive add</h3>
+					</section>
+					<section>
+						<p>Git can help you craft your commits to include only certain combinations and parts of files</p>
+						<img class="nobg" src="images/command_add.png">
+					</section>
+					<section>
+						<h3>Example</h3>
+						<img class="nobg" src="images/example_add.png">
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							* status - show paths with changes
+							* update - add working tree state to the staged set of changes
+							* revert - revert staged set of changes back to the HEAD version
+							* patch - pick hunks and update selectively
+							* diff - view diff between HEAD and index
+							* add untracked - add contents of untracked files to the staged set of changes
+						</script>
+					</section>
+					<section>
+						<img class="nobg" src="images/example_2_add.png" height="600" width="800">
+					</section>
+					<section>
+						<p>The files have been added !</p>
+						<img class="nobg" src="images/example_3_add.png">
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/reflog.gif">
+						<h3>Reflog</h3>
+					</section>
+					<section>
+						<p>Reflog records all changes when we modify a branch</p>
+						<img class="nobg" src="images/command_reflog.png">
+					</section>
+					<section>
+						<h3>Example</h3>
+						<img class="nobg" src="images/example_reflog.png">
+					</section>
+					<section>
+						<p>In the meantime, we dropped a commit and want to retrieve it. Reflog is our savior !</p>
+						<img class="nobg" src="images/example_2_reflog.png">
+					</section>
+					<section>
+						<p>For reverting a branch to an earlier state</p>
+						<img class="nobg" src="images/example_3_reflog.png">
+					</section>
+					<section>
+						<p>Reflog helps only for committed work !</p>
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/stash.gif">
+						<h3>Stash</h3>
+					</section>
+					<section>
+						<p>If changes not staged exist, it could be annoying when we want to change branch or to do a pull without doing a commit</p>
+						<img class="nobg" src="images/example_stash.png">
+					</section>
+					<section>
+						<p>Stash for saving your changes !</p>
+						<img class="nobg" src="images/command_stash.png">
+					</section>
+					<section>
+						<img class="nobg" src="images/example_2_stash.png" height="50" width="2000">
+					</section>
+					<section>
+						<p>List all stashed changes</p>
+						<img class="nobg" src="images/command_2_stash.png">
+					</section>
+					<section>
+						<img class="nobg" src="images/example_3_stash.png">
+					</section>
+					<section>
+						<p>Apply specific stashed changes</p>
+						<img class="nobg" src="images/example_4_stash.png">
+					</section>
+					<section>
+						<p>Apply the last stashed changes</p>
+						<img class="nobg" src="images/example_5_stash.png">
+					</section>
+					<section>
+						<p>Remove all stashed changes</p>
+						<img class="nobg" src="images/command_3_stash.png">
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/grep.gif">
+						<h3>Grep</h3>
+					</section>
+					<section>
+						<p>Search recursively a word/regex in all files from Git repository</p>
+						<img class="nobg" src="images/command_grep.png">
+					</section>
+					<section>
+						<p>Searching the word "int"</p>
+						<img class="nobg" src="images/example_grep.png">
+						<img class="nobg" src="images/example_2_grep.png">
+					</section>
+					<section>
+						<p>Searching the word "int" with the corresponding lines</p>
+						<img class="nobg" src="images/example_3_grep.png">
+						<img class="nobg" src="images/example_4_grep.png">
+					</section>
+					<section>
+						<p>Searching with the word "Roses" AND "red"</p>
+						<img class="nobg" src="images/example_5_grep.png">
+						<img class="nobg" src="images/example_6_grep.png">
+					</section>
+				</section>
+				<section>
+					<section data-background-image="gif/rerere.gif">
+						<h3>Rerere</h3>
+					</section>
+					<section>
+						<p>Rerere (reuse recorded resolution) avoid to resolve a repetitive conflict. Git will remember how the conflict was solved and to solve it automatically in the future</p>
+						<img class="nobg" src="images/command_rerere.png">
+					</section>
+					<section>
+						<h3>Example</h3>
+						<p>Create hello.txt in master with content:</p>
+						<p><em>hello ninjas</em></p>
+					</section>
+					<section>
+						<h3>Example</h3>
+						<p>We create a branch called "french" with modification of hello.txt:</p>
+						<p><em>bonjour ninjas</em></p>
+					</section>
+					<section>
+						<h3>Example</h3>
+						<p>But in master, there is also a modification:</p>
+						<p><em>hello ninjas!</em></p>
+					</section>
+					<section>
+						<p>Let's try to merge "french" with master...</p>
+						<img class="nobg" src="images/example_rerere.png">
+					</section>
+					<section>
+						<img class="nobg" src="images/example_2_rerere.png">
+					</section>
+				</section>
 			</div>
 		</div>
 

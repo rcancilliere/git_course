@@ -237,6 +237,11 @@ body {
   border: 0;
   box-shadow: none; }
 
+.reveal section img.nobg {
+  border: 0;
+  box-shadow: none;
+  background: none; }
+
 .reveal a img {
   -webkit-transition: all .15s linear;
   -moz-transition: all .15s linear;
